@@ -25,7 +25,12 @@ def remove_adjacent(nums):
   if i < len(nums):
     alist.append(nums[i])
   return alist
-
+# в целом верно, но не особо оптимально (одна из i и j лишняя,
+# ведь они всегда отличаются ровно на 1) и второй цикл лишний,
+# потому что в нем всегда будет ровно одна итерация
+# ну и по сишному очень, лучше попробуйте использовать цикл for
+# если есть время, переделайте, а если нет, "подсмотрите" более 
+# оптимальное решение в ответах (директория solutions)
 
 # E. Given two lists sorted in increasing order, create and return a merged
 # list of all the elements in sorted order. You may modify the passed in lists.
@@ -50,6 +55,9 @@ def linear_merge(list1, list2):
     alist.append(list2[j])
     j = j + 1
   return alist
+# отлично, тут цикл for без итераторов, которые мы еще не проходили, 
+# действительно использовать не оптимально, не очень хорошая задача,
+# но очень хорошее решение :)
 
 # Note: the solution above is kind of cute, but unforunately list.pop(0)
 # is not constant time with the standard python list implementation, so

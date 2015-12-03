@@ -1,4 +1,5 @@
 #!/usr/bin/python -tt
+# encoding: cp1251
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
 # http://www.apache.org/licenses/LICENSE-2.0
@@ -21,7 +22,7 @@ def verbing(s):
   if 'ing' == s[-3:]:
     return s + 'ly'
   return s + 'ing'
-
+# отлично
 
 # E. not_bad
 # Given a string, find the first appearance of the
@@ -36,7 +37,10 @@ def not_bad(s):
     if s[s.find('not'):].find('bad') > 1:
       return s[0:s.find('not') ] + 'good' + s[s.find('bad')+3:]
   return s
-
+# здесь я бы "запомнил" места, в которых нашлись подстроки во временные 
+# переменные: это не C, интерпретатор скорее всего не справится с 
+# оптимизацией этого кода и будет каждый раз искать подстроку заново
+# а в остальном всё верно
 
 # F. front_back
 # Consider dividing a string into two halves.
@@ -46,16 +50,20 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-  if len(a) % 2 == 0 and len(b) % 2 == 0:
-    return a[0:len(a)//2] + b[0:len(b)//2] + a[len(a)//2:] + b[len(b)//2:]
-  elif len(a) % 2 == 1 and len(b) % 2 == 1:
-    return a[0:len(a)//2 + 1] + b[0:len(b)//2 + 1] + a[len(a)//2 + 1:] + b[len(b)//2 + 1:]
-  elif len(a) % 2 == 1 and len(b) % 2 == 0:
-    return a[0:len(a)//2 + 1] + b[0:len(b)//2] + a[len(a)//2 + 1:] + b[len(b)//2:]
-  elif len(a) % 2 == 0 and len(b) % 2 == 1:
-    return a[0:len(a)//2] + b[0:len(b)//2 + 1] + a[len(a)//2:] + b[len(b)//2 + 1 :]
-  return 
+#  if len(a) % 2 == 0 and len(b) % 2 == 0:
+#    return a[0:len(a)//2] + b[0:len(b)//2] + a[len(a)//2:] + b[len(b)//2:]
+#  elif len(a) % 2 == 1 and len(b) % 2 == 1:
+#    return a[0:len(a)//2 + 1] + b[0:len(b)//2 + 1] + a[len(a)//2 + 1:] + b[len(b)//2 + 1:]
+#  elif len(a) % 2 == 1 and len(b) % 2 == 0:
+#    return a[0:len(a)//2 + 1] + b[0:len(b)//2] + a[len(a)//2 + 1:] + b[len(b)//2:]
+#  elif len(a) % 2 == 0 and len(b) % 2 == 1:
+#    return a[0:len(a)//2] + b[0:len(b)//2 + 1] + a[len(a)//2:] + b[len(b)//2 + 1 :]
+#  return 
 
+# в целом всё верно, но я бы сделал так:
+  ha = len(a) - len(a)//2
+  hb = len(b) - len(b)//2
+  return a[:ha] + b[:hb] + a[ha:] + b[hb:]
 
 # Simple provided test() function used in main() to print
 # what each function returns vs. what it's supposed to return.

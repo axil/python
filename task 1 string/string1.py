@@ -1,4 +1,5 @@
 #!/usr/bin/python -tt
+# encoding: cp1251
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
 # http://www.apache.org/licenses/LICENSE-2.0
@@ -29,6 +30,15 @@ def donuts(count):
     #a = 'Number of donuts: ' + str(count)
     return 'Number of donuts: ' + str(count)
   return 'Number of donuts: many'
+# правильно, совсем идеально было бы не дублировать слова 'Number of donuts',
+# что-то вроде
+def donuts1(count):
+  # +++your code here+++
+  if count < 10:
+    s = str(count)
+  else:
+    s = 'many'
+  return 'Number of donuts: ' + s
 
 
 # B. both_ends
@@ -39,9 +49,9 @@ def donuts(count):
 def both_ends(s):
   # +++your code here+++
   if len(s) == 1:
-    return s[0:0]
-  return s[0:2]+s[len(s)-2:]
-
+    return ''
+  return s[:2]+s[-2:]
+# тоже всё верно, но вот так меньше букв, лучше читаемость
 
 # C. fix_start
 # Given a string s, return a string
@@ -54,10 +64,13 @@ def both_ends(s):
 # where all instances of stra have been replaced by strb.
 def fix_start(s):
   #s.replace(s[0:1],*)
-  a = s.replace(s[0:1], '*')
+  a = s.replace(s[0], '*')
   # +++your code here+++
-  return s[0:1] + a[1:]
-
+  return s[:1] + a[1:]
+# опять же, убрал лишние символы. Хотя вообще я бы сделал так:
+def fix_start1(s):
+  a = s[1:].replace(s[0], '*')
+  return s[0] + a
 
 # D. MixUp
 # Given strings a and b, return a single string with a and b separated
@@ -68,7 +81,7 @@ def fix_start(s):
 # Assume a and b are length 2 or more.
 def mix_up(a, b):
   # +++your code here+++
-  return b[0:2] + a[2:] + ' ' + a[0:2] + b[2:]
+  return b[:2] + a[2:] + ' ' + a[:2] + b[2:]
 
 # Provided simple test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
@@ -85,10 +98,10 @@ def test(got, expected):
 def main():
   print 'donuts'
   # Each line calls donuts, compares its result to the expected for that call.
-  test(donuts(4), 'Number of donuts: 4')
-  test(donuts(9), 'Number of donuts: 9')
-  test(donuts(10), 'Number of donuts: many')
-  test(donuts(99), 'Number of donuts: many')
+  test(donuts1(4), 'Number of donuts: 4')
+  test(donuts1(9), 'Number of donuts: 9')
+  test(donuts1(10), 'Number of donuts: many')
+  test(donuts1(99), 'Number of donuts: many')
 
   print
   print 'both_ends'
@@ -100,10 +113,10 @@ def main():
   
   print
   print 'fix_start'
-  test(fix_start('babble'), 'ba**le')
-  test(fix_start('aardvark'), 'a*rdv*rk')
-  test(fix_start('google'), 'goo*le')
-  test(fix_start('donut'), 'donut')
+  test(fix_start1('babble'), 'ba**le')
+  test(fix_start1('aardvark'), 'a*rdv*rk')
+  test(fix_start1('google'), 'goo*le')
+  test(fix_start1('donut'), 'donut')
 
   print
   print 'mix_up'

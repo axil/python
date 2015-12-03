@@ -24,9 +24,10 @@ def match_ends(words):
   i = 0
   for s in words:
     if len(s) > 1 and s[0] == s[-1]:
-        i = i + 1
+        i += 1
   # +++your code here+++
   return i
+# отлично, единственно, можно было бы i+=1
 
 
 # B. front_x
@@ -46,7 +47,7 @@ def front_x(words):
       array.append(i)
     
   return sorted(temp) + sorted(array)
-
+# отлично
 
 
 # C. sort_last
@@ -59,7 +60,11 @@ def sort_last(tuples):
   def last(a):
     return a[-1]
   return sorted(tuples, key = last)
-
+# да, всё верно
+# попробуйте здесь улучшить сортировку так, чтобы при одинаковых последних
+# элементах tuple'а проводилось бы сравнение предпоследних и т.д.
+# здесь можно воспользоваться тем, что python умеет сравнивать tuple'ы:
+# (1, 2, 5, 1) > (1, 2, 4, 10)
 
 # Simple provided test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
